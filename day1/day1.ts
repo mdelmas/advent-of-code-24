@@ -50,11 +50,21 @@ const countOccurences = (list: number[]) =>
 
 const count1 = countOccurences(list1);
 const count2 = countOccurences(list2);
+console.log(count1, count2);
 
-let similarityScore = 0;
-for (const key in count1) {
+// let similarityScore = 0;
+// for (const key in count1) {
+//   if (key in count2) {
+//     similarityScore += +key * count1[key] * count2[key];
+//   }
+// }
+
+const similarityScore = Object.keys(count1).reduce((similarityScore, value) => {
+  const key = +value;
   if (key in count2) {
     similarityScore += +key * count1[key] * count2[key];
   }
-}
+  return similarityScore;
+}, 0);
+
 console.log("Part 2 : ", similarityScore);
