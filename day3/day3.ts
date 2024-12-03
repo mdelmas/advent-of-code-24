@@ -13,3 +13,26 @@ for (const match of matches) {
 }
 
 console.log("Part 1:", result);
+
+// Part 2
+const regex2 = /mul\((\d{1,3}),(\d{1,3})\)|don't\(\)|do\(\)/g;
+const matches2 = memory.matchAll(regex2);
+
+let skip = false;
+let result2 = 0;
+for (const match of matches2) {
+  const [action, val1, val2] = match;
+
+  if (action === "don't()" || action === "do()") {
+    skip = action === "don't()" ? true : false;
+    continue;
+  }
+
+  if (skip) {
+    continue;
+  }
+
+  result2 += +val1 * +val2;
+}
+
+console.log("Part 2:", result2);
